@@ -1,0 +1,46 @@
+﻿@model Entities.Teacher
+
+<div>
+    <h4>Teacher</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => Model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => Model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => Model.userName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => Model.userName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => Model.DateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => Model.DateOfBirth)
+        </dd>
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => Model.experience)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.experience)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
