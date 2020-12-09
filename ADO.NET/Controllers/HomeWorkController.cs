@@ -1,4 +1,7 @@
-﻿using BLL;
+﻿using ADO.NET.Models;
+using AutoMapper;
+using BLL;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +30,10 @@ namespace ADO.NET.Controllers
         // GET: HomeWork
         public ActionResult Index(int IdUser)
         {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Homework, HomeworkModel>());
+            var mapper = new Mapper(config);
+            var student = mapper.Map<List<HomeworkModel>>(homeworkRepository.List());
+
             ViewData["IdUser"] = IdUser;
             return View(homeworkRepository.List());
         }

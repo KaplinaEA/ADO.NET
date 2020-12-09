@@ -8,9 +8,7 @@ namespace Entities
 {
     public class Homework 
     {
-        //[Key]
         public int id { get; set; }
-        //[Required]
         public string name { get; set; }
         public string text { get; set; }
 

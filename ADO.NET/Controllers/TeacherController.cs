@@ -1,4 +1,6 @@
-﻿using BLL;
+﻿using ADO.NET.Models;
+using AutoMapper;
+using BLL;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -34,8 +36,10 @@ namespace ADO.NET.Controllers
         [Authorize]
         new public ActionResult Profile(int Id)
         {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Student, TeacherModel>());
+            var mapper = new Mapper(config);
             ViewData["Id"] = Id;
-            return View(this.teacherRepository.Show(Id));
+            return View(mapper.Map<TeacherModel>(teacherRepository.Show(Id)));
         }
 
         [Authorize]
