@@ -1,6 +1,7 @@
 ﻿using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -10,14 +11,17 @@ namespace DAL
 {
     public class TeacherDao : AbstractDao, ITeacherDao
     {
-        public string Edit(int id, string name, DateTime birthday, int experience)
+        public string Edit(int id, DateTime birthday, int experience)
         {
             using (SqlConnection cs = new SqlConnection(_connectionString))
             {
                 try
                 {
                     cs.Open();
-                    SqlCommand command = new SqlCommand("Update_Teacher_Profile", cs);
+                    SqlCommand command = cs.CreateCommand();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Update_Teacher_Profile";
+
                     this.AddSqlParameters(command, new SqlParameter[]
                     {
                         new SqlParameter("@ID", id),
@@ -38,8 +42,10 @@ namespace DAL
         {
             using (SqlConnection cs = new SqlConnection(_connectionString))
             {
-                SqlCommand command = new SqlCommand("GetTheacher", cs);
                 cs.Open();
+                SqlCommand command = cs.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "GetTheacher";
 
                 command.Parameters.Add(new SqlParameter("@ID", id));
                 var reader = command.ExecuteReader();

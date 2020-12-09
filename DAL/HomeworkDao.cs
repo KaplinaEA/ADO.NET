@@ -1,6 +1,7 @@
 ﻿using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -14,12 +15,20 @@ namespace DAL
         {
             using (SqlConnection cs = new SqlConnection(_connectionString))
             {
-                SqlCommand command = new SqlCommand("Create_User", cs);
+                SqlCommand command = cs.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "Create_Homework";
+
                 cs.Open();
 
-                var name = new SqlParameter("@Name", homework.name);
-                var text = new SqlParameter("@Text", homework.text);
-                this.AddSqlParameters(command, new SqlParameter[] { name, text });
+                System.Diagnostics.Debug.WriteLine(homework.name, homework.text);
+
+                this.AddSqlParameters(command, new SqlParameter[]
+                  {
+                        new SqlParameter("@Id", homework.id),
+                        new SqlParameter("@Name", homework.name),
+                        new SqlParameter("@Text", homework.text)
+                  });
 
                 command.ExecuteNonQuery();
             }
@@ -30,7 +39,10 @@ namespace DAL
             {
                 try
                 {
-                    SqlCommand command = new SqlCommand("DeleteHomework", cs);
+                    SqlCommand command = cs.CreateCommand();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "DeleteHomework";
+
                     command.Parameters.Add(new SqlParameter("@ID", id));
 
                     cs.Open();
@@ -50,7 +62,10 @@ namespace DAL
             {
                 var result = new List<Homework>();
 
-                SqlCommand command = new SqlCommand("GetAllHomework", cs);
+                SqlCommand command = cs.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "GetAllHomework";
+
                 cs.Open();
                 var reader = command.ExecuteReader();
 
@@ -71,7 +86,10 @@ namespace DAL
         {
             using (SqlConnection cs = new SqlConnection(_connectionString))
             {
-                SqlCommand command = new SqlCommand("GetHomework", cs);
+                SqlCommand command = cs.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "GetHomework";
+
                 cs.Open();
 
                 command.Parameters.Add(new SqlParameter("@ID", id));
@@ -100,7 +118,10 @@ namespace DAL
                 try
                 {
                     cs.Open();
-                    SqlCommand command = new SqlCommand("Update_Homework", cs);
+                    SqlCommand command = cs.CreateCommand();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Update_Homework";
+
                     this.AddSqlParameters(command, new SqlParameter[]
                     {
                         new SqlParameter("@ID", id),
@@ -123,7 +144,10 @@ namespace DAL
                 try
                 {
                     cs.Open();
-                    SqlCommand command = new SqlCommand("Update_Homework", cs);
+                    SqlCommand command = cs.CreateCommand();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Update_Homework";
+
                     this.AddSqlParameters(command, new SqlParameter[]
                     {
                         new SqlParameter("@ID", id),
@@ -148,7 +172,9 @@ namespace DAL
                 try
                 {
                     cs.Open();
-                    SqlCommand command = new SqlCommand("Assign_Homework", cs);
+                    SqlCommand command = cs.CreateCommand();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Assign_Homework";
                     this.AddSqlParameters(command, new SqlParameter[]
                     {
                         new SqlParameter("@S", studetId),

@@ -10,7 +10,7 @@ namespace BLL
     public interface IStudentRepository
     {
         string Edit(int id, DateTime birthday, string studentClass);
-        Journal GetJournal(int id);
+        IEnumerable<Journal> GetJournal(int id);
         Student Show(int id);
     }
 }

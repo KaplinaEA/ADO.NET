@@ -10,7 +10,7 @@ namespace DAL
     public interface IStudentDao
     {
         string Edit(int id, DateTime birthday, string studentClass);
-        Journal GetJournal(int id);
+        IEnumerable<Journal> GetJournal(int id);
 
         Student Show(int id);
     }

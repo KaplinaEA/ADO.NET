@@ -1,5 +1,7 @@
 ﻿@model Entities.Teacher
 
+    <input type="hidden" name="Id" value="@ViewData["Id"]" />
+
 <div>
     <h4>Teacher</h4>
     <hr />
@@ -28,19 +30,17 @@
             @Html.DisplayFor(model => Model.DateOfBirth)
         </dd>
 
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => Model.experience)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.experience)
+            @Html.DisplayFor(model => Model.experience)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { Id = @ViewData["Id"] })
+    @Html.ActionLink("Back to List", "Index", new { Id = @ViewData["Id"] })
 </p>

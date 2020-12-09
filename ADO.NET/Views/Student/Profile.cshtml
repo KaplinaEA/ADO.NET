@@ -1,45 +1,46 @@
 ﻿@model Entities.Student
 
+<input type="hidden" name="Id" value="@ViewData["Id"]" />
 
 <div>
     <h4>Student</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => Model.email)
+            @Html.DisplayNameFor(model => model.email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => Model.email)
+            @Html.DisplayFor(model => model.email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => Model.userName)
+            @Html.DisplayNameFor(model => model.userName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => Model.userName)
+            @Html.DisplayFor(model => model.userName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => Model.DateOfBirth)
+            @Html.DisplayNameFor(model => model.DateOfBirth)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => Model.DateOfBirth)
+            @Html.DisplayFor(model => model.DateOfBirth)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => Model.studentClass)
+            @Html.DisplayNameFor(model => model.studentClass)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => Model.studentClass)
+            @Html.DisplayFor(model => model.studentClass)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit",  new { Id = @ViewData["Id"] })
+    @Html.ActionLink("Back to List", "Index", new { Id = @ViewData["Id"] })
 </p>

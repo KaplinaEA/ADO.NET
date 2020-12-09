@@ -16,9 +16,9 @@ namespace BLL
         {
             this.teacherDao = new TeacherDao();
         }
-        public string Edit(int id, string name, DateTime birthday, int experience)
+        public string Edit(int id, DateTime birthday, int experience)
         {
-            return teacherDao.Edit(id, name, birthday, experience);
+            return teacherDao.Edit(id,birthday, experience);
         }
         public Teacher Show(int id)
         {

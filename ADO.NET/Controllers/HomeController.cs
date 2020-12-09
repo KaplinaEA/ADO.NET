@@ -59,22 +59,21 @@ namespace ADO.NET.Controllers
             if (ModelState.IsValid)
             {
                 User user = new User(email, password);
-
                 User userInDB = this.userRepository.GetByEmail(email);
                 if (userInDB != null && userInDB.password == user.password)
                 {
                     userRepository.LogIn(userInDB.id);
                     if (userInDB.userRole == 1)
                     {
-                        FormsAuthentication.SetAuthCookie(user.email, true);
-                        return RedirectToAction("Index", "Student");
-                    }                        
+                        System.Diagnostics.Debug.WriteLine(userInDB.id + " SignIn");
+                        FormsAuthentication.SetAuthCookie(email, true);
+                        return RedirectToAction("Index", "Student", new { Id = userInDB.id });
+                    }
                     else
                     {
-                        FormsAuthentication.SetAuthCookie(user.email, true);
-                        return RedirectToAction("Index", "Teacher");
-                    }
-                        
+                        FormsAuthentication.SetAuthCookie(email, true);
+                        return RedirectToAction("Index", "Teacher", new { Id = userInDB.id });
+                    }                        
                 }
                 else
                 {

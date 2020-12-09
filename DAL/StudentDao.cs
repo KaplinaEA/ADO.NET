@@ -39,10 +39,12 @@ namespace DAL
                 }
             }
         }
-        public Journal GetJournal(int id)
+        public IEnumerable<Journal> GetJournal(int id)
         {
             using (SqlConnection cs = new SqlConnection(_connectionString))
             {
+                var result = new List<Journal>();
+
                 SqlCommand command = cs.CreateCommand();
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "GetJournalByStudent";
@@ -52,16 +54,14 @@ namespace DAL
                 command.Parameters.Add(new SqlParameter("@ID", id));
                 var reader = command.ExecuteReader();
 
-                var result = new Journal();
-
                 while (reader.Read())
                 {
-                    result = new Journal
-                    (
-                        (string)reader["Name"],
-                        (string)reader["Text"],
-                        (int)reader["grade"]
-                    );
+                    result.Add(new Journal()
+                    {
+                        name = (string)reader["Name"],
+                        text = (string)reader["Text"],
+                        grade = (int)reader["grade"]
+                    });
                 }
                 return result;
             }
@@ -84,15 +84,17 @@ namespace DAL
 
                 while (reader.Read())
                 {
-                    result = new Student { 
+
+                    result = new Student
+                    {
                         email = (string)reader["Email"],
-                        userName = (string)reader["UserName"],
                         password = (string)reader["User_password"],
                         userRole = (int)reader["UserRole"],
-                        studentClass = (string)reader["class"],
-                        DateOfBirth = (DateTime)reader["DateOfBirth"],
                         id = (int)reader["Id"]
-                    };                    
+                    };
+                    if (reader["DateOfBirth"] != DBNull.Value) result.DateOfBirth = (DateTime)reader["DateOfBirth"];
+                    if (reader["UserName"] != DBNull.Value) result.userName = (string)reader["UserName"];
+                    if (reader["class"] != DBNull.Value) result.studentClass = (string)reader["class"];        
                 }
                 return result;
             }            

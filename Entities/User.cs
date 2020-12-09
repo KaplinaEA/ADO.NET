@@ -20,6 +20,10 @@ namespace Entities
 
         public bool login { get; set; }
 
+        public override string ToString()
+        {
+            return base.ToString() + userName;
+        }
         public User() { }
         public User(string email, string password) {
             this.email = email;

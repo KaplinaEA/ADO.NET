@@ -1,6 +1,10 @@
-﻿<div>
-    @Html.ActionLink("Профиль", "Profile", "Teacher")
+﻿<input type="hidden" name="Id" value="@ViewData["Id"]" />
+<div>
+    @Html.ActionLink("Профиль", "Profile", new { Id = @ViewData["Id"] })
 </div>
 <div>
-    @Html.ActionLink("Дисциплины", "Index", "Homework")
+    @Html.ActionLink("Изменить профиль", "Edit", new { Id = @ViewData["Id"] })
+</div>
+<div>
+    @Html.ActionLink("Дисциплины", "Index", "Homework", new { Id = @ViewData["Id"] })
 </div>

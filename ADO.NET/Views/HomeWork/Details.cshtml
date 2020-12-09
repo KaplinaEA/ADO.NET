@@ -1,0 +1,28 @@
+﻿@model Entities.Homework
+
+<div>
+    <h4>Homework</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.text)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = @ViewData["id"], IdUser = @ViewData["IdUser"] }) |
+    @Html.ActionLink("Back to List", "Index", new { IdUser = @ViewData["IdUser"] })
+</p>

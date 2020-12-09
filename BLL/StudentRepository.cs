@@ -20,7 +20,7 @@ namespace BLL
         {
             return studentDao.Edit(id, birthday, studentClass);
         }
-        public Journal GetJournal(int id)
+        public IEnumerable<Journal> GetJournal(int id)
         {
             return studentDao.GetJournal(id);
         }

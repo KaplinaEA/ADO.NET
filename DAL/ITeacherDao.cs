@@ -9,7 +9,7 @@ namespace DAL
 {
     public interface ITeacherDao
     {
-        string Edit(int id, string name, DateTime birthday, int experience);
+        string Edit(int id, DateTime birthday, int experience);
         Teacher Show(int id);
     }
 }

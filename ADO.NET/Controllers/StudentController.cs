@@ -1,4 +1,5 @@
 ﻿using BLL;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,26 +26,49 @@ namespace ADO.NET.Controllers
             this.userRepository = userRepository;
             this.studentRepository = studentRepository;
         }
+        [Authorize]
+        public ActionResult Index(int Id)
+        {
+            System.Diagnostics.Debug.WriteLine(Id + " Index");
+            ViewData["Id"] = Id;
+            return View();
+        }
+        [Authorize]
+        new public ActionResult Profile(int Id)
+        {
+            ViewData["Id"] = Id;
+            Student student = this.studentRepository.Show(Id);
+            return View(this.studentRepository.Show(Id));
+        }
+        [Authorize]
+        [HttpGet]
+        public ActionResult GetJournal(int Id)
+        {
+            ViewData["Id"] = Id;            
+            return View(this.studentRepository.GetJournal(Id));
+        }
+        [Authorize]
+        [HttpGet]
+        public ActionResult Edit(int Id)
+        {
+            ViewData["Id"] = Id;
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult Edit(DateTime DateOfBirth, string studentClass, int Id)
+        {
+            System.Diagnostics.Debug.WriteLine(Id + " Edit2");
+            ViewData["Id"] = Id;
+            if (ModelState.IsValid)
+            {
+                this.studentRepository.Edit(Id, DateOfBirth, studentClass);
 
-        // GET: Student
-        public ActionResult Index()
-        {
-            return View();
-        }
+                return RedirectToAction("Index", "Student", new { Id = Id });
+            }
+            
 
-        public ActionResult Profile()
-        {            
-            return View(this.studentRepository.Show(userRepository.GetByEmail(User.Identity.Name).id));
-        }
-        public ActionResult GetJournal()
-        {
             return View();
         }
-           
-        public ActionResult Edit()
-        {
-            return View();
-        }
-        
     }
 }

@@ -147,6 +147,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -208,10 +209,18 @@
     <Content Include="Views\HomeWork\Index.cshtml" />
     <Content Include="Views\Student\Profile.cshtml" />
     <Content Include="Views\Teacher\Profile.cshtml" />
+    <Content Include="Views\Teacher\Edit.cshtml" />
+    <Content Include="Views\Student\GetJournal.cshtml" />
+    <Content Include="Views\Student\Edit.cshtml" />
+    <Content Include="Views\HomeWork\Create.cshtml" />
+    <Content Include="Views\HomeWork\Edit.cshtml" />
+    <Content Include="Views\HomeWork\Details.cshtml" />
+    <Content Include="Views\HomeWork\Assign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="PL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
